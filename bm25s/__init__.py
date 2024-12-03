@@ -899,7 +899,7 @@ class BM25:
         corpus = corpus if corpus is not None else self.corpus
 
         if corpus is not None:
-            with open(save_dir / corpus_name, "w") as f:
+            with open(save_dir / corpus_name, "wt", encoding="utf-8") as f:
                 # if it's not an iterable, we skip
                 if not isinstance(corpus, Iterable):
                     logging.warning(
@@ -918,7 +918,7 @@ class BM25:
                         continue
 
                     try:
-                        doc_str = json_functions.dumps(doc)
+                        doc_str = json_functions.dumps(doc, ensure_ascii = False)
                     except Exception as e:
                         logging.warning(f"Error saving document at index {i}: {e}")
                     else:
